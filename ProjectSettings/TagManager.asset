@@ -14,7 +14,7 @@ TagManager:
   - Background
   - Ground
   - Effects
-  - 
+  - Trigger
   - 
   - 
   - 
@@ -50,11 +50,14 @@ TagManager:
   - name: Player
     uniqueID: 2369485935
     locked: 0
-  - name: Effects
-    uniqueID: 3474908077
+  - name: Trigger
+    uniqueID: 3601914989
     locked: 0
   - name: UI
     uniqueID: 277922893
+    locked: 0
+  - name: Effects
+    uniqueID: 3474908077
     locked: 0
   m_RenderingLayers:
   - Default
