@@ -15,7 +15,7 @@ TagManager:
   - Ground
   - Effects
   - Trigger
-  - 
+  - NPC
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2369485935
+    locked: 0
+  - name: NPC
+    uniqueID: 3715688403
     locked: 0
   - name: Trigger
     uniqueID: 3601914989
