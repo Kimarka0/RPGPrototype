@@ -9,7 +9,7 @@ public class DialogueTrigger : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject interactionUI;
-    [SerializeField] private float uiShowDelay = .5f;
+    [SerializeField] private float uiShowDelay = 1f;
 
     [Header("Settings")]
     [SerializeField] private bool canRetrigger = true;
@@ -23,7 +23,7 @@ public class DialogueTrigger : MonoBehaviour
     private bool isDialogueActive;
     private bool isOnColldown;
 
-    private void Awake()
+    private void Start()
     {
         if(interactionUI != null)
         {
@@ -111,6 +111,10 @@ public class DialogueTrigger : MonoBehaviour
         {
             StartCoroutine(StartCooldown());
         }
+        else
+        {
+            canInteract = true;
+        }
     }
 
     private IEnumerator StartCooldown()
@@ -120,6 +124,10 @@ public class DialogueTrigger : MonoBehaviour
 
         isOnColldown = false;
         canInteract = true;
+        if(interactionUI != null)
+        {
+            interactionUI.SetActive(true);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -175,22 +183,22 @@ public class DialogueTrigger : MonoBehaviour
         playerControls?.Enable();
     }
     
-    private void OnDisable()
-    {
-        playerControls?.Disable();
+     private void OnDisable()
+   {
+         playerControls?.Disable();
         
-        if (DialogueManager.instance != null)
+      if (DialogueManager.instance != null)
         {
             DialogueManager.instance.OnDialogueEnded.RemoveListener(OnDialogueEnded);
         }
-         if (interactionUI != null)
-        {
+     if (interactionUI != null)
+      {
             interactionUI.SetActive(false);
         }
         
         if (uiDelayCoroutine != null)
-        {
-            StopCoroutine(uiDelayCoroutine);
-        }
-    }
-}
+         {
+             StopCoroutine(uiDelayCoroutine);
+         }
+     }
+ }
