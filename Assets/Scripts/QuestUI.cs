@@ -30,7 +30,7 @@ public class QuestUI : MonoBehaviour
         foreach(var quest in testQuests)
         {
             GameObject entry = Instantiate(questEntryPrefab, questListContent);
-            TextMeshProUGUI questNameText = entry.transform.Find("QuestNameText").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI questNameText = entry.transform.Find("QuestText").GetComponent<TextMeshProUGUI>();
             Transform objectiveList = entry.transform.Find("ObjectiveList");
 
             questNameText.text = quest.quest.name;

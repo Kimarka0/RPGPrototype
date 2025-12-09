@@ -16,11 +16,6 @@ MonoBehaviour:
   description: Kill 5 Goblins
   questID: G9ea6e8c6-6d91-4983-8451-07dfc7accc3e
   objectives:
-  - objectiveID: 
-    description: 
-    type: 0
-    requiredAmount: 0
-    currentAmount: 0
   - objectiveID: 1
     description: Kill 5 Goblins
     type: 1

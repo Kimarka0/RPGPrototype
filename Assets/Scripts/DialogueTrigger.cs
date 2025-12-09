@@ -6,6 +6,10 @@ public class DialogueTrigger : MonoBehaviour
 {
     [Header("Dialogue")]
     [SerializeField] private string dialogueFileName;
+    [SerializeField] private bool checkQuestRequirements;
+    [SerializeField] private string requiredQuestID;
+    [SerializeField] private QuestState requiredQuestState = QuestState.Completed;
+    [SerializeField] private Sprite npcPortrait;
 
     [Header("UI")]
     [SerializeField] private GameObject interactionUI;
@@ -23,30 +27,47 @@ public class DialogueTrigger : MonoBehaviour
     private bool isDialogueActive;
     private bool isOnColldown;
 
+    public bool IsPlayerInTrigger => isPlayerInTrigger;
+    public bool CanInteract => canInteract;
+    public bool IsDialogueActive => isDialogueActive;
+    public bool IsOnCooldown => IsOnCooldown;
+    public Sprite NpcPortrait => npcPortrait;
+
     private void Start()
+    {
+        InitializeUI();
+        InitializeInput();
+        SubscribeDialogueEvents();
+    }
+
+    private void InitializeUI()
     {
         if(interactionUI != null)
         {
             interactionUI.SetActive(false);
         }
+    }
+    private void InitializeInput()
+    {
+        playerControls = new PlayerControls();
+        playerControls.Controls.Interact.performed += OnInteractPerformed;
+        playerControls.Enable();
+    }
+    private void SubscribeDialogueEvents()
+    {
         if(DialogueManager.instance != null)
         {
             DialogueManager.instance.OnDialogueEnded.AddListener(OnDialogueEnded);
+            DialogueManager.instance.OnDialogueEnded.AddListener(OnDialogueEnded);
         }
-
-        playerControls = new PlayerControls();
-
-        playerControls.Controls.Interact.performed += OnInteractPerformed;
-        playerControls.Enable();
-
     }
 
     private void Update()
     {
-        UpdateUI();
+        UpdateInteractionUI();
     }
 
-    private void UpdateUI()
+    private void UpdateInteractionUI()
     {
         if(interactionUI != null)
         {
@@ -54,16 +75,46 @@ public class DialogueTrigger : MonoBehaviour
 
             if(shouldShowUI && interactionUI.activeSelf)
             {
-                if(uiDelayCoroutine != null)
-                {
-                    StopCoroutine(uiDelayCoroutine);
-                }
-                uiDelayCoroutine = StartCoroutine(ShowUIWithDelay());
+                ShowInteractionUI();
             }
             else if(!shouldShowUI && interactionUI.activeSelf)
             {
-                interactionUI.SetActive(false);
+                HideInteractionUI();
             }
+        }
+    }
+
+    private bool CheckQuestRequirements()
+    {
+        if(!checkQuestRequirements) return true;
+        if(QuestSystem.instance == null) return false;
+        switch (requiredQuestState)
+        {
+            case QuestState.Completed:
+                return QuestSystem.instance.IsQuestCompleted(requiredQuestID);
+            case QuestState.InProgress:
+                return QuestSystem.instance.IsQuestActive(requiredQuestID);
+            case QuestState.NotStarted:
+                return !QuestSystem.instance.IsQuestActive(requiredQuestID) && !QuestSystem.instance.IsQuestCompleted(requiredQuestID);
+        default:
+            return true;
+        } 
+    }
+
+    private void ShowInteractionUI()
+    {
+        if(uiDelayCoroutine != null)
+            {
+                StopCoroutine(uiDelayCoroutine);
+            }
+            uiDelayCoroutine = StartCoroutine(ShowUIWithDelay());
+    }
+
+    private void HideInteractionUI()
+    {
+        if(interactionUI != null)
+        {
+            interactionUI.SetActive(false);
         }
     }
     private IEnumerator ShowUIWithDelay()
@@ -72,10 +123,7 @@ public class DialogueTrigger : MonoBehaviour
 
         if(isPlayerInTrigger && !isDialogueActive && canInteract && !isOnColldown)
         {
-            if(interactionUI != null)
-            {
-                interactionUI.SetActive(true);
-            }
+           ShowInteractionUI();
         }
     }
 
@@ -94,14 +142,12 @@ public class DialogueTrigger : MonoBehaviour
             return;
         }
 
+        DialogueManager.instance.SetSpeakerPortrait(npcPortrait);
         DialogueManager.instance.StartDialogueFromFile(dialogueFileName);
         isDialogueActive = true;
         canInteract = false;
 
-        if(interactionUI != null)
-        {
-            interactionUI.SetActive(false);
-        }
+        HideInteractionUI();
     }
     private void OnDialogueEnded()
     {
@@ -124,10 +170,7 @@ public class DialogueTrigger : MonoBehaviour
 
         isOnColldown = false;
         canInteract = true;
-        if(interactionUI != null)
-        {
-            interactionUI.SetActive(true);
-        }
+        HideInteractionUI();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -139,10 +182,7 @@ public class DialogueTrigger : MonoBehaviour
             {
                 canInteract = true;
             }
-            if(interactionUI != null)
-            {
-                interactionUI.SetActive(true);
-            }
+            ShowInteractionUI();
         }
     }
 
@@ -152,10 +192,7 @@ public class DialogueTrigger : MonoBehaviour
         {
             isPlayerInTrigger = false;
 
-            if(interactionUI != null)
-            {
-                interactionUI.SetActive(false);
-            }
+            HideInteractionUI();
 
             if (isOnColldown)
             {
@@ -174,31 +211,28 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
-    public bool IsDialogueActive()
+    public void SetCanInteract(bool value)
     {
-        return isDialogueActive;
+        canInteract = value;
     }
     private void OnEnable()
     {
         playerControls?.Enable();
     }
     
-     private void OnDisable()
+    private void OnDisable()
    {
          playerControls?.Disable();
         
-      if (DialogueManager.instance != null)
+        if (DialogueManager.instance != null)
         {
             DialogueManager.instance.OnDialogueEnded.RemoveListener(OnDialogueEnded);
         }
-     if (interactionUI != null)
-      {
-            interactionUI.SetActive(false);
-        }
+        HideInteractionUI();
         
         if (uiDelayCoroutine != null)
-         {
+        {
              StopCoroutine(uiDelayCoroutine);
-         }
+        }
      }
  }
