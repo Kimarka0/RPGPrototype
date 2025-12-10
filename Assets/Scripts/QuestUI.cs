@@ -7,40 +7,97 @@ public class QuestUI : MonoBehaviour
     [SerializeField] private Transform questListContent;
     [SerializeField] private GameObject questEntryPrefab;
     [SerializeField] private GameObject objectiveTextPrefab;
-    [SerializeField] private int testQuestAmount;
-    [SerializeField] private Quest testQuest;
-    private List<QuestProgress> testQuests = new();
 
     private void Start()
     {
-        for(int i = 0; i < testQuestAmount; i++)
-        {
-            testQuests.Add(new QuestProgress(testQuest));
-        }
+        SubscribeToQuestEvents();
         UpdateQuestUI();
     }
 
-    private void UpdateQuestUI()
+    private void SubscribeToQuestEvents()
     {
-        foreach(Transform child in questListContent)
+        if(QuestSystem.instance != null)
+        {
+            // Подписываемся на события квестов
+            QuestSystem.instance.onQuestStarted.AddListener(OnQuestChanged);
+            QuestSystem.instance.onQuestProgressUpdated.AddListener(OnQuestChanged);
+            QuestSystem.instance.onQuestCompleted.AddListener(OnQuestChanged);
+        }
+        else
+        {
+            Debug.LogError("QuestSystem не найден в сцене!");
+        }
+    }
+
+    private void OnQuestChanged(QuestProgress questProgress)
+    {
+        // Обновляем UI когда что-то меняется
+        UpdateQuestUI();
+    }
+
+    public void UpdateQuestUI()
+    {
+        // Очищаем старые записи
+        foreach (Transform child in questListContent)
         {
             Destroy(child.gameObject);
         }
 
-        foreach(var quest in testQuests)
+        // Получаем активные квесты из QuestSystem
+        if(QuestSystem.instance == null) return;
+        
+        List<QuestProgress> activeQuests = QuestSystem.instance.GetAllActiveQuests();
+
+        // Показываем каждый квест
+        foreach (QuestProgress questProgress in activeQuests)
         {
-            GameObject entry = Instantiate(questEntryPrefab, questListContent);
-            TextMeshProUGUI questNameText = entry.transform.Find("QuestText").GetComponent<TextMeshProUGUI>();
-            Transform objectiveList = entry.transform.Find("ObjectiveList");
+            CreateQuestEntry(questProgress);
+        }
+    }
 
-            questNameText.text = quest.quest.name;
+    private void CreateQuestEntry(QuestProgress questProgress)
+    {
+        GameObject entry = Instantiate(questEntryPrefab, questListContent);
+        
+        // Находим текст квеста
+        TextMeshProUGUI questNameText = entry.transform.Find("QuestText")?.GetComponent<TextMeshProUGUI>();
+        if(questNameText != null)
+        {
+            questNameText.text = questProgress.Quest.QuestName;
+        }
+        
+        // Находим список целей
+        Transform objectiveList = entry.transform.Find("ObjectiveList");
+        if(objectiveList == null) return;
 
-            foreach(var objective in quest.objectives)
+        // Создаём цели
+        foreach (QuestObjective objective in questProgress.Objectives)
+        {
+            GameObject objTextGO = Instantiate(objectiveTextPrefab, objectiveList);
+            TextMeshProUGUI objText = objTextGO.GetComponent<TextMeshProUGUI>();
+            
+            if(objText != null)
             {
-                GameObject objTextGO = Instantiate(objectiveTextPrefab, objectiveList);
-                TextMeshProUGUI objText = objTextGO.GetComponent<TextMeshProUGUI>();
-                objText.text = $"{objective.description} {objective.currentAmount}/{objective.requiredAmount}";
+                objText.text = $"{objective.Description} {objective.CurrentAmount}/{objective.RequiredAmount}";
+                
+                // Зачеркиваем если выполнено
+                if(objective.IsCompleted)
+                {
+                    objText.text = $"<s>{objText.text}</s>";
+                    objText.color = Color.gray;
+                }
             }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        // Отписываемся от событий
+        if(QuestSystem.instance != null)
+        {
+            QuestSystem.instance.onQuestStarted.RemoveListener(OnQuestChanged);
+            QuestSystem.instance.onQuestProgressUpdated.RemoveListener(OnQuestChanged);
+            QuestSystem.instance.onQuestCompleted.RemoveListener(OnQuestChanged);
         }
     }
 }

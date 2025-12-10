@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eddf2007944c808498376f7de60ca8a0, type: 3}
-  m_Name: Kill5GoblinsQuest
+  m_Name: Quest_wolves
   m_EditorClassIdentifier: Assembly-CSharp::Quest
-  questName: Goblin Killer 1
-  description: Kill 5 Goblins
-  questID: G9ea6e8c6-6d91-4983-8451-07dfc7accc3e
+  questName: "\u0423\u0431\u0438\u0442\u044C \u0432\u043E\u043B\u043A\u043E\u0432"
+  description: 
+  questID: "\u04238b1969dd-dd0d-482a-8460-104b2a52bea6"
+  requiredQuests: []
   objectives:
-  - objectiveID: 1
-    description: Kill 5 Goblins
+  - objectiveID: objective_kill_wolves
+    description: Kill wolves
     type: 1
     requiredAmount: 5
     currentAmount: 0
+    requiredDialogueID: 
+    requiredDialogueNodeID: 
+    objectiveIcon: {fileID: 0}

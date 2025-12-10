@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Quest/Quests")]
@@ -25,7 +23,7 @@ public class Quest : ScriptableObject
     private void OnValidate()
     {
 #if UNITY_EDITOR
-        if (string.IsNullOrEmpty(questID))
+        if (string.IsNullOrEmpty(questID) && !string.IsNullOrWhiteSpace(questName))
         {
             questID = questName + Guid.NewGuid().ToString();
         }

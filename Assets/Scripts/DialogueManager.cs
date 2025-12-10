@@ -8,16 +8,20 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager instance;
+    public static DialogueManager instance {get; private set;}
     [SerializeField] private TextMeshProUGUI nameText;
+    [Header("UI")]
     [SerializeField] TextMeshProUGUI dialogueText;
     [SerializeField] private Animator animator;
-    private Queue<string> sentences;
+    [SerializeField] private Image speakerPortrait;
 
-    private string dialoguesFolder = "Dialogues";
+    [Header("Settings")]
+    [SerializeField] private string dialoguesFolder = "Dialogues";
+    [SerializeField] private float typeSpeed = 0.03f;
 
     public UnityEvent OnDialogueStarted;
     public UnityEvent OnDialogueEnded;
+    private Queue<string> sentences = new Queue<string>();
     private bool isDialogueActive = false;
     private void Awake()
     {
@@ -31,11 +35,6 @@ public class DialogueManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    void Start()
-    {
-        sentences = new Queue<string>();
-    }
-    
     public Dialogue LoadDialogue(string fileName)
     {
         string exePath = Path.Combine(Application.dataPath, "..", dialoguesFolder, fileName + ".json");
@@ -92,6 +91,7 @@ public class DialogueManager : MonoBehaviour
 
         foreach(string sentence in dialogue.sentences)
         {
+            if(!string.IsNullOrWhiteSpace(sentence))
             sentences.Enqueue(sentence);
 
         }
@@ -118,7 +118,7 @@ public class DialogueManager : MonoBehaviour
         foreach(char letter in sentence.ToCharArray())
         {
             dialogueText.text += letter;
-            yield return null;
+            yield return new WaitForSeconds(typeSpeed);
         }
     }
 
@@ -132,5 +132,17 @@ public class DialogueManager : MonoBehaviour
     public bool IsDialogueActive()
     {
         return isDialogueActive;
+    }
+
+    public void SetSpeakerPortrait(Sprite portrait)
+    {
+        if(speakerPortrait == null) return;
+        if(portrait == null) return;
+        speakerPortrait.enabled = true;
+        speakerPortrait.sprite = portrait;
+    }
+    public void SetTypeSpeed(float speed)                        
+    {
+        typeSpeed = Mathf.Max(0.001f, speed);
     }
 }

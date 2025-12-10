@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [System.Serializable]
-public class DialogueNode : MonoBehaviour
+public class DialogueNode
 {
     [SerializeField] private string nodeID;
     [SerializeField] private string speakerName;
@@ -14,12 +13,11 @@ public class DialogueNode : MonoBehaviour
 
     public string NodeID => nodeID;
     public string SpeakerName => speakerName;
-    public string DialogueName => dialogueText;
+    public string DialogueText => dialogueText;
     public List<DialogueChoice> Choices => choices;
     public List<DialogueAction> Actions => actions;
     public string NextNodeID => nextNodeID;
-
-    public bool isHasChoices => choices != null && choices.Count > 0;
+    public bool HasChoices => choices != null && choices.Count > 0;
 }
 
 [System.Serializable]
@@ -33,6 +31,7 @@ public class DialogueChoice
     public string NextNodeID => nextNodeID;
     public List<DialogueAction> Actions => actions;
 }
+
 [System.Serializable]
 public class DialogueAction
 {
@@ -48,6 +47,7 @@ public class DialogueAction
     public int Amount => amount;
     public string Parameter => parameter;
 }
+
 public enum DialogueActionType
 {
     None,
@@ -61,8 +61,8 @@ public enum DialogueActionType
     EndDialogue
 }
 
-[System.Serializable]
-public class DialogueData
+[CreateAssetMenu(menuName = "Dialogue/Node Dialogue")]
+public class DialogueData : ScriptableObject
 {
     [SerializeField] private string dialogueID;
     [SerializeField] private string dialogueName;
