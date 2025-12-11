@@ -56,7 +56,6 @@ public class DialogueTrigger : MonoBehaviour
 
     private void Update()
     {
-        // Проверяем статус диалога
         if(useNodeSystem && DialogueNodeManager.instance != null)
         {
             isDialogueActive = DialogueNodeManager.instance.IsDialogueActive();
@@ -66,7 +65,6 @@ public class DialogueTrigger : MonoBehaviour
             isDialogueActive = DialogueManager.instance.IsDialogueActive();
         }
         
-        // Управляем UI
         UpdateUI();
     }
 
@@ -117,7 +115,6 @@ public class DialogueTrigger : MonoBehaviour
 
     private void StartDialogue()
     {
-        // Нодовая система
         if(useNodeSystem && dialogueData != null)
         {
             if(DialogueNodeManager.instance == null)
@@ -132,7 +129,6 @@ public class DialogueTrigger : MonoBehaviour
             if(interactionUI != null)
                 interactionUI.SetActive(false);
         }
-        // Простая система
         else if(!useNodeSystem && !string.IsNullOrEmpty(dialogueFileName))
         {
             if(DialogueManager.instance == null)

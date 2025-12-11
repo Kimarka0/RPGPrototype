@@ -16,8 +16,8 @@ public class DialogueNodeManager : MonoBehaviour
     [SerializeField] private Transform choiceContainer;
     
     [Header("Animation")]
-    [SerializeField] private Animator animator; // ДОБАВЛЕНО
-    [SerializeField] private string openParameter = "isOpen"; // ДОБАВЛЕНО
+    [SerializeField] private Animator animator;
+    [SerializeField] private string openParameter = "isOpen";
     
     [Header("Events")]
     public UnityEvent OnDialogueStarted;
@@ -49,12 +49,11 @@ public class DialogueNodeManager : MonoBehaviour
         
         currentDialogue = dialogue;
         
-        // Включаем панель и анимацию
         if(dialoguePanel != null)
             dialoguePanel.SetActive(true);
         
         if(animator != null)
-            animator.SetBool(openParameter, true); // АНИМАЦИЯ ОТКРЫТИЯ
+            animator.SetBool(openParameter, true);
         
         OnDialogueStarted?.Invoke();
         ShowNode(dialogue.StartNodeID);
@@ -77,24 +76,20 @@ public class DialogueNodeManager : MonoBehaviour
             return;
         }
         
-        // Показываем текст
         if(speakerNameText != null)
             speakerNameText.text = currentNode.SpeakerName;
         
         if(dialogueText != null)
             dialogueText.text = currentNode.DialogueText;
         
-        // Выполняем действия ноды
         ExecuteActions(currentNode.Actions);
         
-        // Очищаем старые кнопки
         if(choiceContainer != null)
         {
             foreach(Transform child in choiceContainer)
                 Destroy(child.gameObject);
         }
         
-        // Если есть выборы - создаём кнопки
         if(currentNode.HasChoices)
         {
             foreach(var choice in currentNode.Choices)
@@ -102,7 +97,6 @@ public class DialogueNodeManager : MonoBehaviour
                 CreateChoiceButton(choice);
             }
         }
-        // Иначе кнопка "Продолжить"
         else
         {
             CreateContinueButton();
@@ -184,12 +178,10 @@ public class DialogueNodeManager : MonoBehaviour
     
     public void EndDialogue()
     {
-        // Анимация закрытия
+
         if(animator != null)
-            animator.SetBool(openParameter, false); // АНИМАЦИЯ ЗАКРЫТИЯ
+            animator.SetBool(openParameter, false);
         
-        // Можно отключить панель с задержкой после анимации
-        // Или оставить как есть - аниматор сам скроет
         
         currentDialogue = null;
         currentNode = null;

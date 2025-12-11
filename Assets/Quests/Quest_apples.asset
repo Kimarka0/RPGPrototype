@@ -10,19 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eddf2007944c808498376f7de60ca8a0, type: 3}
-  m_Name: Quest_wolves
+  m_Name: Quest_apples
   m_EditorClassIdentifier: Assembly-CSharp::Quest
-  questName: "\u0423\u0431\u0438\u0442\u044C \u0432\u043E\u043B\u043A\u043E\u0432"
+  questName: Apple collect
   description: 
-  questID: "\u04238b1969dd-dd0d-482a-8460-104b2a52bea6"
+  questID: A12c5ef0b-74d4-4300-97e1-068a094ac6eb
   requiredQuests: []
   objectives:
-  - objectiveID: objective_kill_wolves
-    description: Kill wolves
-    type: 1
+  - objectiveID: objective_collect_apples
+    description: 
+    type: 0
     requiredAmount: 5
     currentAmount: 0
-    requiredEnemyID: 1
     requiredDialogueID: 
     requiredDialogueNodeID: 
     objectiveIcon: {fileID: 0}

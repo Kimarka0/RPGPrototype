@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Quest/Quests")]
@@ -49,6 +50,9 @@ public class Quest : ScriptableObject
         [SerializeField] private int requiredAmount;
         [SerializeField] private int currentAmount;
 
+        [Header("Enemy objectives")]
+        [SerializeField] private string requiredEnemyID;
+
         [Header("Dialogue objectives")]
         [SerializeField] private string requiredDialogueID;
         [SerializeField] private string requiredDialogueNodeID;
@@ -62,6 +66,7 @@ public class Quest : ScriptableObject
         public int CurrentAmount => currentAmount;
         public string RequiredDialogueID => requiredDialogueID;
         public string RequiredDialogueNodeID => requiredDialogueNodeID;
+        public string RequiredEnemyID => requiredEnemyID;
         public Sprite ObjectiveIcon => objectiveIcon;
 
         public QuestObjective(
@@ -72,6 +77,7 @@ public class Quest : ScriptableObject
             int currentAmount = 0,
             string requiredDialogueID = null,
             string requiredDialogueNodeID = null,
+            string requiredEnemyID = null,
             Sprite objectiveIcon = null)
     {
         this.objectiveID = objectiveID;
@@ -81,6 +87,7 @@ public class Quest : ScriptableObject
         this.currentAmount = currentAmount;
         this.requiredDialogueID = requiredDialogueID;
         this.requiredDialogueNodeID = requiredDialogueNodeID;
+        this.requiredEnemyID = requiredEnemyID;
         this.objectiveIcon = objectiveIcon;
     }
     public QuestObjective() {}
@@ -126,6 +133,7 @@ public class Quest : ScriptableObject
                 currentAmount: objective.CurrentAmount,
                 requiredDialogueID: objective.RequiredDialogueID,
                 requiredDialogueNodeID: objective.RequiredDialogueNodeID,
+                requiredEnemyID: objective.RequiredEnemyID,
                 objectiveIcon: objective.ObjectiveIcon
 
 

@@ -10,9 +10,9 @@ public class QuestSystem : MonoBehaviour
     [SerializeField] private List<Quest> allQuests = new List<Quest>();
 
     [Header("Events")]
-    public UnityEvent<QuestProgress> onQuestStarted; // УБРАЛ [SerializeField], сделал public
-    public UnityEvent<QuestProgress> onQuestProgressUpdated; // УБРАЛ [SerializeField]
-    public UnityEvent<QuestProgress> onQuestCompleted; // УБРАЛ [SerializeField]
+    public UnityEvent<QuestProgress> onQuestStarted;
+    public UnityEvent<QuestProgress> onQuestProgressUpdated;
+    public UnityEvent<QuestProgress> onQuestCompleted;
 
     private readonly Dictionary<string, QuestProgress> activeQuests = new();
     private readonly List<string> completedQuestsIDs = new();
