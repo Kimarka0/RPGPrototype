@@ -45,7 +45,7 @@ public class PlayerHealthUI : MonoBehaviour
         for(int i = 0; i < heartCount; i++)
         {
             GameObject heart = Instantiate(heartPrefab, heartsContainer);
-            Image heartImage = GetComponent<Image>();
+            Image heartImage = heart.GetComponent<Image>();
 
             if(heartImage != null)
             {
@@ -72,7 +72,7 @@ public class PlayerHealthUI : MonoBehaviour
             int heartMinHP = i * healthPerHeart;
             int heartMaxHP = (i + 1) * healthPerHeart;
 
-            if(current > heartMinHP)
+            if(current >= heartMaxHP)
             {
                 hearts[i].fillAmount = 1f;
             }

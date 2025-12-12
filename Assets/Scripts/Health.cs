@@ -16,7 +16,7 @@ public class Health : MonoBehaviour
     public bool IsDead => currentHealth <= 0;
     public float HealthPercent => (float)currentHealth/maxHealth;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+   protected virtual void Awake()
     {
         currentHealth = maxHealth;
     }
