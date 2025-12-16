@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1552141318512036989}
   - component: {fileID: 3588096206992481141}
   m_Layer: 10
-  m_Name: DialogTrigger
+  m_Name: DialogueTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,10 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a07b2b3c2bc584fa192cb90837b752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueTrigger
+  useNodeSystem: 1
+  dialogueData: {fileID: 11400000, guid: f4e68b2e70612524aa8f3829bd1e6178, type: 2}
   dialogueFileName: GuardDialogue
+  checkQuestRequirements: 0
+  requiredQuestID: 
+  requiredQuestState: 2
+  npcPortrait: {fileID: 0}
   interactionUI: {fileID: 0}
-  uiShowDelay: 0.5
-  canRetrigger: 1
+  canRetrigger: 0
   retriggerCooldown: 3
 --- !u!61 &3588096206992481141
 BoxCollider2D:
@@ -84,7 +89,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.00024850667, y: -0.14155626}
+  m_Offset: {x: -0.0056796893, y: 0.018586427}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -94,7 +99,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.31448445, y: 0.5978335}
+  m_Size: {x: 0.24465488, y: 0.2775482}
   m_EdgeRadius: 0
 --- !u!1 &5827686826543538994
 GameObject:
@@ -162,7 +167,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.014121681, y: 0.014642987}
+  m_Offset: {x: -0.011891361, y: 0.10229301}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -172,7 +177,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.1760703, y: 0.1816287}
+  m_Size: {x: 0.0980105, y: 0.14817448}
   m_EdgeRadius: 0
 --- !u!1 &8599099147542966785
 GameObject:
@@ -255,7 +260,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 7394164572003697101, guid: 1175529b3e14bfd47848c9c9aba262ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -291,7 +296,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.15, y: 0.69, z: 0}
-  m_LocalScale: {x: 9, y: 8, z: 1}
+  m_LocalScale: {x: 12, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6763703724075694636}
