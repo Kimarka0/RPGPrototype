@@ -9,6 +9,51 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a76c29ad375fcbb4b9103db506924ff8, type: 3}
+  m_Script: {fileID: 11500000, guid: 90a63f64cd8bcaf4fa7615324750541b, type: 3}
   m_Name: GuardianStartDialogue
   m_EditorClassIdentifier: Assembly-CSharp::DialogueData
+  dialogueID: 
+  dialogueName: 
+  startNodeID: Start
+  nodes:
+  - nodeID: Start
+    speakerName: Guardian
+    dialogueText: Hello there...
+    choices: []
+    actions: []
+    nextNodeID: GuardianName
+  - nodeID: GuardianName
+    speakerName: Guardian
+    dialogueText: My name is Bob...
+    choices: []
+    actions: []
+    nextNodeID: GiveQuest
+  - nodeID: GiveQuest
+    speakerName: Guardian
+    dialogueText: You need to kill 5 goblins and i will give you a reward...
+    choices:
+    - choiceText: Yes
+      nextNodeID: YesNode
+      actions:
+      - actionType: 1
+        questID: "\u04238b1969dd-dd0d-482a-8460-104b2a52bea6"
+        itemID: 
+        amount: 0
+        parameter: 
+    - choiceText: No
+      nextNodeID: NoNode
+      actions: []
+    actions: []
+    nextNodeID: 
+  - nodeID: YesNode
+    speakerName: Guardian
+    dialogueText: Thank you! I will wait...
+    choices: []
+    actions: []
+    nextNodeID: 
+  - nodeID: NoNode
+    speakerName: Guardian
+    dialogueText: "\u0418\u0434\u0438 \u043D\u0430\u0445\u0443\u0439 \u0443\u0440\u043E\u0434"
+    choices: []
+    actions: []
+    nextNodeID: 

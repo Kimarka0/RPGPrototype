@@ -13,12 +13,16 @@ public class PlayerController : MonoBehaviour
     private Vector2 currentMovement;
     private Vector2 currentMovementInput;
     private PlayerControls playerControls;
+    private Animator animator;
+    private Transform visualTransform;
     private bool isRunPressed;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponentInChildren<Animator>();
+        visualTransform = transform.Find("UnitRoot");
         playerControls = new PlayerControls();
         playerControls.Controls.Move.started += OnMovementInput;
         playerControls.Controls.Move.performed += OnMovementInput;
@@ -35,6 +39,7 @@ public class PlayerController : MonoBehaviour
         currentMovementInput = context.ReadValue<Vector2>();
         currentMovement.x = currentMovementInput.x;
         currentMovement.y = currentMovementInput.y;
+        animator.SetBool("isMove", true);
     }
 
     private void OnRunInput(InputAction.CallbackContext context)
@@ -53,6 +58,31 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         MovementHandle();
+    }
+
+    private void Update()
+    {
+        UpdateAnimations();
+        SpriteFlip();
+    }
+
+    private void UpdateAnimations()
+    {
+        bool isMoving = currentMovement.sqrMagnitude > 0.01f * 0.01f;
+
+        animator.SetBool("isMove", isMoving);
+    }
+
+    private void SpriteFlip()
+    {
+        if(currentMovement.x < -0.01f)
+        {
+            visualTransform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (currentMovement.x > 0.01f)
+        {
+            visualTransform.localScale = new Vector3(-1, 1, 1);
+        }
     }
 
     private void OnEnable()

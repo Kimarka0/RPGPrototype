@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestUI : MonoBehaviour
 {
@@ -18,7 +19,6 @@ public class QuestUI : MonoBehaviour
     {
         if(QuestSystem.instance != null)
         {
-            // Подписываемся на события квестов
             QuestSystem.instance.onQuestStarted.AddListener(OnQuestChanged);
             QuestSystem.instance.onQuestProgressUpdated.AddListener(OnQuestChanged);
             QuestSystem.instance.onQuestCompleted.AddListener(OnQuestChanged);
@@ -75,6 +75,7 @@ public class QuestUI : MonoBehaviour
         {
             GameObject objTextGO = Instantiate(objectiveTextPrefab, objectiveList);
             TextMeshProUGUI objText = objTextGO.GetComponent<TextMeshProUGUI>();
+
             
             if(objText != null)
             {
@@ -88,8 +89,14 @@ public class QuestUI : MonoBehaviour
                 }
             }
         }
+        ForCanvas();
     }
-
+    
+    public void ForCanvas()
+    {
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(questListContent as RectTransform);
+    }
     private void OnDestroy()
     {
         // Отписываемся от событий
