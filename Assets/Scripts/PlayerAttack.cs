@@ -4,17 +4,17 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private int damage = 10;
-    [SerializeField] private Collider2D attackTrigger;
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attackRange;
+    [SerializeField] private float attackRate = 2f;
+    [SerializeField] private LayerMask enemyLayer;
     private PlayerControls playerControls;
     private Animator animator;
+    private float nextAttackTime = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        if(attackTrigger != null)
-        {
-            attackTrigger.enabled = false;
-        }
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         playerControls = new PlayerControls();
         playerControls.Enable();
         playerControls.Controls.Attack.started += OnAttackStarted;
@@ -22,31 +22,35 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnAttackStarted(InputAction.CallbackContext context)
     {
-        animator.SetTrigger("Attack");
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Enemy"))
+        if(Time.time >= nextAttackTime)
         {
-            EnemyHealth enemyHealth = other.GetComponentInParent<EnemyHealth>();
-            enemyHealth.TakeDamage(damage);
-            Debug.Log("Attacked");
+            Attack();
+            nextAttackTime = Time.time + 1f / attackRate; 
         }
     }
 
-    public void OnAttackStartedAnimationEvent()
+    private void Attack()
     {
-        attackTrigger.enabled = true;
-    }
+        animator.SetTrigger("Attack");
 
-    public void OnAttackEndedAnimationEvent()
-    {
-        attackTrigger.enabled = false;
+        Collider2D [] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+
+        foreach(Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponentInParent<EnemyHealth>().TakeDamage(damage);
+            Debug.Log("Damaged!");
+        }
     }
     private void OnDisable()
     {
         playerControls.Controls.Attack.started -= OnAttackStarted;
         playerControls.Disable();
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if(attackPoint == null)  
+            return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

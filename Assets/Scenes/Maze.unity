@@ -142,14 +142,14 @@ PrefabInstance:
     - target: {fileID: 973358045726713787, guid: 73de9e003f961e34ba27769b0f9c671f, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1733268166}
     - target: {fileID: 2633571926672263345, guid: 73de9e003f961e34ba27769b0f9c671f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.055142403
+      value: -0.14572978
       objectReference: {fileID: 0}
     - target: {fileID: 2633571926672263345, guid: 73de9e003f961e34ba27769b0f9c671f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1286156
+      value: -2.013906
       objectReference: {fileID: 0}
     - target: {fileID: 2633571926672263345, guid: 73de9e003f961e34ba27769b0f9c671f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -653,7 +653,7 @@ Transform:
   m_GameObject: {fileID: 1256014397}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.055142403, y: -1.1286156, z: -10}
+  m_LocalPosition: {x: -0.14572978, y: -2.013906, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -756,6 +756,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb4e10c4e2c0d304797290edd04ab8ab, type: 3}
+--- !u!224 &1733268166 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6194328387447735133, guid: bb4e10c4e2c0d304797290edd04ab8ab, type: 3}
+  m_PrefabInstance: {fileID: 1733268165}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1830699560
 PrefabInstance:
   m_ObjectHideFlags: 0
