@@ -18,9 +18,4 @@ public class PlayerHealth : Health
 
         base.Awake();
     }
-
-    private void Update()
-    {
-        TakeDamage(10);
-    }
 }

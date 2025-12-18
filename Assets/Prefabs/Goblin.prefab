@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4321302827895382225}
   - component: {fileID: 6596693022996516716}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GoblinVisual
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8619959204500659096}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5324845844938123657}
   - component: {fileID: 4031606677014901719}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Goblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -188,9 +188,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6892291988207307196}
   - component: {fileID: 8157838056685757333}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GoblinCollider
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

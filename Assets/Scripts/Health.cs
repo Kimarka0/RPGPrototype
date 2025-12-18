@@ -5,7 +5,7 @@ public class Health : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private int maxHealth = 100;
-    [SerializeField] private int currentHealth;
+    [SerializeField] private int currentHealth = 100;
 
     [Header("Events")]
     public UnityEvent<int, int> OnHealthChanged;
@@ -26,7 +26,7 @@ public class Health : MonoBehaviour
     {
         if(IsDead) return;
         currentHealth -= damage;
-        currentHealth = Mathf.Max(0, maxHealth);
+        currentHealth = Mathf.Max(0, currentHealth);
 
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
@@ -39,5 +39,6 @@ public class Health : MonoBehaviour
     public void Die()
     {
         OnDeath?.Invoke();
+        Debug.Log("Died");
     }
 }

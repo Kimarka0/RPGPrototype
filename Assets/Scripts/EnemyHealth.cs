@@ -6,6 +6,7 @@ public class EnemyHealth : Health
     [SerializeField] private string enemyID;
     private void Start()
     {
+        base.Awake();
         OnDeath.AddListener(OnEnemyDeath);
     }
 
