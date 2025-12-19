@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class DialogueNode
@@ -10,6 +11,7 @@ public class DialogueNode
     [SerializeField] private List<DialogueChoice> choices = new List<DialogueChoice>();
     [SerializeField] private List<DialogueAction> actions = new List<DialogueAction>();
     [SerializeField] private string nextNodeID;
+
 
     public string NodeID => nodeID;
     public string SpeakerName => speakerName;

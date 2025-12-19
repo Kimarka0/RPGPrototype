@@ -11,17 +11,27 @@ public class PlayerAttack : MonoBehaviour
     private PlayerControls playerControls;
     private Animator animator;
     private float nextAttackTime = 0f;
+    private bool canAttack = true;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+
         animator = GetComponentInChildren<Animator>();
         playerControls = new PlayerControls();
         playerControls.Enable();
         playerControls.Controls.Attack.started += OnAttackStarted;
     }
 
+    private void Start()
+    {
+        DialogueNodeManager.instance.OnDialogueStarted.AddListener(DisableAttack);
+        DialogueNodeManager.instance.OnDialogueEnded.AddListener(EnableAttack);
+        
+    }
+
     private void OnAttackStarted(InputAction.CallbackContext context)
     {
+        if(!canAttack) return;
         if(Time.time >= nextAttackTime)
         {
             Attack();
@@ -40,6 +50,16 @@ public class PlayerAttack : MonoBehaviour
             enemy.GetComponentInParent<EnemyHealth>().TakeDamage(damage);
             Debug.Log("Damaged!");
         }
+    }
+
+    private void EnableAttack()
+    {
+        canAttack = true;
+    }
+
+    private void DisableAttack()
+    {
+        canAttack = false;
     }
     private void OnDisable()
     {

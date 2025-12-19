@@ -20,8 +20,8 @@ public class DialogueNodeManager : MonoBehaviour
     [SerializeField] private string openParameter = "isOpen";
     
     [Header("Events")]
-    public UnityEvent OnDialogueStarted;
-    public UnityEvent OnDialogueEnded;
+    public UnityEvent OnDialogueStarted = new UnityEvent();
+    public UnityEvent OnDialogueEnded = new UnityEvent();
     
     private DialogueData currentDialogue;
     private DialogueNode currentNode;

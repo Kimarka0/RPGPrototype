@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Transform visualTransform;
     private bool isRunPressed;
+    private bool canMove = true;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -34,8 +35,15 @@ public class PlayerController : MonoBehaviour
         playerControls.Enable();
     }
 
+    private void Start()
+    {
+        DialogueNodeManager.instance.OnDialogueStarted.AddListener(DisableMovement);
+        DialogueNodeManager.instance.OnDialogueEnded.AddListener(EnableMovement);
+    }
+
     private void OnMovementInput(InputAction.CallbackContext context)
     {
+        if(!canMove) return;
         currentMovementInput = context.ReadValue<Vector2>();
         currentMovement.x = currentMovementInput.x;
         currentMovement.y = currentMovementInput.y;
@@ -48,6 +56,7 @@ public class PlayerController : MonoBehaviour
     }
     private void MovementHandle()
     {
+        if(!canMove) return;
         float currentSpeed = moveSpeed;
         if(isRunPressed) currentSpeed *= runMultiplier;
         Vector2 movement = currentMovement * currentSpeed;
@@ -83,6 +92,16 @@ public class PlayerController : MonoBehaviour
         {
             visualTransform.localScale = new Vector3(-1, 1, 1);
         }
+    }
+
+    private void EnableMovement()
+    {
+        canMove = true;
+    }
+    
+    private void DisableMovement()
+    {
+        canMove = false;
     }
 
     private void OnEnable()
