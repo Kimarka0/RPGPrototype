@@ -375,6 +375,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 335070149811123676, guid: 73e2f5f011d29c940b8daf6ad4f69587, type: 3}
+      propertyPath: showDebugRays
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 335070149811123676, guid: 73e2f5f011d29c940b8daf6ad4f69587, type: 3}
       propertyPath: 'patrolPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 1443495109}
@@ -700,83 +704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AstarPathfindingProject::AstarPath
-  version: 1
-  data:
-    dataString: UEsDBBQAAAgIAAAYIexIKfreXQIAABYFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMzk0Gk0CS3lqHkB5ImJBOLr5spDXWIEseSQ6QDP+9K9nGLp2eWN6+3X37IX8xqV2F3Bu7sFIsjUD2fcSCzb6Neucj7mFj9Fp+Ysd5k8IXgQSR8wJeGsKTEOZMid5K/kNvVCCPCay1zI0t52KDqXHeEZyDckgua3yI1gR9jdiefi7uQsiBrMlNsD7JuhuPjmRy1B5tT+2IHa1h1ZorKCsUQXJPns5a9tUk0jQ10zKCcG6Ukq5Vwvyhip2mULma+iCCkECdxfLJ5YSAAuWm8EHnMPw5zx36VpSFw720NKImL/tpmrmV4LaNsg9QdZQwu7q9jrqatMt/GBdJdOfWlI9d5WQcqvhC8u0LHDg4PxjtEL4fiI8j2oHawrvCtwL1k1lYU2tBTm/rEFo7nNz3f0/NpQXybY83Us/Auvr/gkIPx9j/PlWyfA+uy+sGWCsTZx7Xj5a284sEx+NwbQpCg4rfDl9hM7yi1vEgrfPkarvUQd67qW2gsnmcWeim9qmxGiPciq5Qg/KHFaXx50s88w3KnnkeILyXtnjr657BWUiEe/54fOZamd1pWa4wuyW64rn2SmrsRQfHE80pNVo3NzacSRe2rm0OfBC2qaX4+7RYDjORTwXkyUTcznhyMeV4izc3wHORAOcJi7cnNfUJatUIbcdDW9N9ck131n1GRgsLVbx3YWG3kJ+lGYxc6tysuUXUz02Gk3C0VIReppgLSQNao/dSx32zr4wpw7coslOiLHY633sLWZ8lY5X8MD4gGUvjdyNjAT7d8srih8RdKN4lO7LjH1BLAwQUAAAICAAAGCHsHhTMam0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0UlqiWUqaaUpimqFRioVZsqGuaXKqRaq5eWJyWophYnKyoVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAGCHsSCn63l0CAAAWBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAGCHsHhTMam0AAAB4AAAACQAkAAAAAAAAAAAAAACqAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAGIDAAAAAA==
-    upgradeData: []
-    file_cachedStartup: {fileID: 0}
-    data_cachedStartup: []
-    cacheStartup: 0
-    graphStructureLocked: []
-  showNavGraphs: 1
-  showUnwalkableNodes: 1
-  debugMode: 0
-  debugFloor: 0
-  debugRoof: 1
-  manualDebugFloorRoof: 0
-  showSearchTree: 0
-  unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
-  maxNearestNodeDistance: 100
-  scanOnStartup: 1
-  fullGetNearestSearch: 0
-  prioritizeGraphs: 0
-  prioritizeGraphsLimit: 1
-  colorSettings:
-    _SolidColor:
-      r: 0.11764706
-      g: 0.4
-      b: 0.7882353
-      a: 0.9
-    _UnwalkableNode:
-      r: 1
-      g: 0
-      b: 0
-      a: 0.5
-    _BoundsHandles:
-      r: 0.29
-      g: 0.454
-      b: 0.741
-      a: 0.9
-    _ConnectionLowLerp:
-      r: 0
-      g: 1
-      b: 0
-      a: 0.5
-    _ConnectionHighLerp:
-      r: 1
-      g: 0
-      b: 0
-      a: 0.5
-    _MeshEdgeColor:
-      r: 0
-      g: 0
-      b: 0
-      a: 0.5
-    _AreaColors:
-    - r: 0
-      g: 0
-      b: 0
-      a: 0
-  tagNames: []
-  heuristic: 2
-  heuristicScale: 1
-  threadCount: 1
-  maxFrameTime: 10
-  batchGraphUpdates: 0
-  graphUpdateBatchingInterval: 0.2
-  <lastScanTime>k__BackingField: 0
-  inGameDebugPath: 
-  graphUpdateRoutineRunning: 0
-  graphUpdatesWorkItemAdded: 0
-  lastGraphUpdate: -9999
-  euclideanEmbedding:
-    mode: 0
-    seed: 0
-    pivotPointRoot: {fileID: 0}
-    spreadOutCount: 1
-  showGraphs: 1
-  nextFreePathID: 1
 --- !u!4 &1572015389
 Transform:
   m_ObjectHideFlags: 0

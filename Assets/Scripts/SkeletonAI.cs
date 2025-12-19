@@ -11,6 +11,7 @@ public class SkeletonAI : MonoBehaviour
     [SerializeField] private int attackDamage = 10;
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private Transform attackPoint;
+    [SerializeField] private Transform visualTransform;
 
     [Header("Target")]
     [SerializeField] private Transform player;
@@ -30,6 +31,7 @@ public class SkeletonAI : MonoBehaviour
     private int currentPatrolIndex;
     private float nextAttackTime = 0f;
     private Vector2 lastKnownPlayerPosition;
+    private Vector2 lastMoveDirection;
 
     private enum EnemyState{Patrol, Chase, Attack}
 
@@ -137,7 +139,11 @@ public class SkeletonAI : MonoBehaviour
 
     private void MoveTowards(Vector2 target, float speed)
     {
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        Vector2 currentPos = transform.position;
+        Vector2 newPos = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        transform.position = newPos;
+        lastMoveDirection = (newPos - currentPos).normalized;
+        SpriteFlip();
         animator.SetBool("isMove", true);
     }
 
@@ -164,6 +170,11 @@ public class SkeletonAI : MonoBehaviour
 
     private void PerformAttack()
     {
+        if(attackPoint == null)
+        {
+            Debug.LogError($"{gameObject.name}: attackPoint is NULL! Назначь его в инспекторе.");
+            return;
+        }
         animator.SetTrigger("Attack");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
@@ -171,7 +182,7 @@ public class SkeletonAI : MonoBehaviour
         foreach(Collider2D enemy in hitEnemies)
         {
             Debug.Log($"{gameObject.name}: damaged!");
-            enemy.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+            enemy.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
         }
     }
 
@@ -196,6 +207,17 @@ public class SkeletonAI : MonoBehaviour
                 Gizmos.DrawLine(currentPoint,nextPoint);
                 Gizmos.DrawWireSphere(currentPoint, 0.3f);
             }
+        }
+    }
+    private void SpriteFlip()
+    {
+        if(lastMoveDirection.x < -0.01f)
+        {
+            visualTransform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (lastMoveDirection.x > 0.01f)
+        {
+            visualTransform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
