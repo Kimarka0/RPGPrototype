@@ -31,24 +31,20 @@ public class QuestUI : MonoBehaviour
 
     private void OnQuestChanged(QuestProgress questProgress)
     {
-        // Обновляем UI когда что-то меняется
         UpdateQuestUI();
     }
 
     public void UpdateQuestUI()
     {
-        // Очищаем старые записи
         foreach (Transform child in questListContent)
         {
             Destroy(child.gameObject);
         }
 
-        // Получаем активные квесты из QuestSystem
         if(QuestSystem.instance == null) return;
         
         List<QuestProgress> activeQuests = QuestSystem.instance.GetAllActiveQuests();
 
-        // Показываем каждый квест
         foreach (QuestProgress questProgress in activeQuests)
         {
             CreateQuestEntry(questProgress);
@@ -59,18 +55,15 @@ public class QuestUI : MonoBehaviour
     {
         GameObject entry = Instantiate(questEntryPrefab, questListContent);
         
-        // Находим текст квеста
         TextMeshProUGUI questNameText = entry.transform.Find("QuestText")?.GetComponent<TextMeshProUGUI>();
         if(questNameText != null)
         {
             questNameText.text = questProgress.Quest.QuestName;
         }
         
-        // Находим список целей
         Transform objectiveList = entry.transform.Find("ObjectiveList");
         if(objectiveList == null) return;
 
-        // Создаём цели
         foreach (QuestObjective objective in questProgress.Objectives)
         {
             GameObject objTextGO = Instantiate(objectiveTextPrefab, objectiveList);
@@ -81,7 +74,6 @@ public class QuestUI : MonoBehaviour
             {
                 objText.text = $"{objective.Description} {objective.CurrentAmount}/{objective.RequiredAmount}";
                 
-                // Зачеркиваем если выполнено
                 if(objective.IsCompleted)
                 {
                     objText.text = $"<s>{objText.text}</s>";
@@ -99,7 +91,6 @@ public class QuestUI : MonoBehaviour
     }
     private void OnDestroy()
     {
-        // Отписываемся от событий
         if(QuestSystem.instance != null)
         {
             QuestSystem.instance.onQuestStarted.RemoveListener(OnQuestChanged);
