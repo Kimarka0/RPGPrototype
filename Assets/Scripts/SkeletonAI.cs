@@ -177,12 +177,12 @@ public class SkeletonAI : MonoBehaviour
         }
         animator.SetTrigger("Attack");
 
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, playerLayer);
 
-        foreach(Collider2D enemy in hitEnemies)
+        foreach(Collider2D player in hitPlayer)
         {
             Debug.Log($"{gameObject.name}: damaged!");
-            enemy.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
+            player.GetComponentInParent<PlayerHealth>().TakeDamage(attackDamage);
         }
     }
 

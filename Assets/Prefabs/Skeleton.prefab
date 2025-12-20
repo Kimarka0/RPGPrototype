@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 5324845844938123657}
   - component: {fileID: 335070149811123676}
   - component: {fileID: 4031606677014901719}
-  - component: {fileID: 2079880792137366795}
+  - component: {fileID: 8945196781144848831}
   m_Layer: 11
   m_Name: Skeleton
   m_TagString: Enemy
@@ -120,35 +120,33 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   enemyID: 1
---- !u!114 &2079880792137366795
-MonoBehaviour:
+--- !u!50 &8945196781144848831
+Rigidbody2D:
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6860762658664291786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6bab02950d5d0b438b2fd8ce5baed1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SkeletonAI
-  patrolSpeed: 0
-  chaseSpeed: 0
-  detectionRange: 5
-  attackRange: 1.5
-  attackDamage: 10
-  attackCooldown: 1
-  attackPoint: {fileID: 0}
-  visualTransform: {fileID: 0}
-  player: {fileID: 0}
-  patrolPoints: []
-  playerLayer:
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 6200000, guid: 8d06828818ef97544a249148a85bb19f, type: 2}
+  m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  obstacleLayer:
+  m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  showDebugRays: 1
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1001 &9000021825846974214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -441,6 +439,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 6451036946996704392, guid: 64359be8b124840d0bb4846426882691, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6451036946996704392, guid: 64359be8b124840d0bb4846426882691, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1816960513
+      objectReference: {fileID: 0}
     - target: {fileID: 6493692104118310104, guid: 64359be8b124840d0bb4846426882691, type: 3}
       propertyPath: m_Layer
       value: 11
@@ -574,7 +580,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 8d06828818ef97544a249148a85bb19f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -600,7 +606,7 @@ CapsuleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.009661388, y: 0.32457218}
   m_Size: {x: 0.6893646, y: 0.76816255}
-  m_Direction: 0
+  m_Direction: 1
 --- !u!224 &3926718374755508197 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5375047960093657315, guid: 64359be8b124840d0bb4846426882691, type: 3}

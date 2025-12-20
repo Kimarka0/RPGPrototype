@@ -65,6 +65,8 @@ public class PlayerAttack : MonoBehaviour
     {
         playerControls.Controls.Attack.started -= OnAttackStarted;
         playerControls.Disable();
+        DialogueNodeManager.instance.OnDialogueStarted.RemoveListener(DisableAttack);
+        DialogueNodeManager.instance.OnDialogueEnded.RemoveListener(EnableAttack);
     }
 
     private void OnDrawGizmosSelected()

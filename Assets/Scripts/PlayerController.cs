@@ -112,5 +112,7 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         playerControls?.Disable();
+        DialogueNodeManager.instance.OnDialogueStarted.RemoveListener(DisableMovement);
+        DialogueNodeManager.instance.OnDialogueEnded.RemoveListener(EnableMovement);
     }
 }

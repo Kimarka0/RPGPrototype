@@ -48,14 +48,14 @@ TagManager:
   - name: Ground
     uniqueID: 3616578455
     locked: 0
+  - name: Enemy
+    uniqueID: 2478006783
+    locked: 0
   - name: Player
     uniqueID: 2369485935
     locked: 0
   - name: NPC
     uniqueID: 3715688403
-    locked: 0
-  - name: Enemy
-    uniqueID: 2478006783
     locked: 0
   - name: Trigger
     uniqueID: 3601914989
