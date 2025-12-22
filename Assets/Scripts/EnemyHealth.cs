@@ -4,16 +4,22 @@ public class EnemyHealth : Health
 {
     [Header("Enemy Setting")]
     [SerializeField] private string enemyID;
+    private Animator animator;
+    private SkeletonAI skeletonAI;
     private void Start()
     {
         base.Awake();
+        animator = GetComponentInChildren<Animator>();
+        skeletonAI = GetComponent<SkeletonAI>();
         OnDeath.AddListener(OnEnemyDeath);
     }
 
     private void OnEnemyDeath()
     {
+        animator.SetBool("isDie", true);
+        skeletonAI.enabled = false;
         UpdateKillQuests();
-        Destroy(gameObject);
+        Destroy(gameObject, 10f);
     }
 
     private void UpdateKillQuests()

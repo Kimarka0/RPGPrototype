@@ -82,7 +82,7 @@ MonoBehaviour:
   chaseSpeed: 6
   detectionRange: 5
   attackRange: 1.5
-  attackDamage: 20
+  attackDamage: 10
   attackCooldown: 1
   attackPoint: {fileID: 8619959204500659096}
   visualTransform: {fileID: 5929074844280383480}
