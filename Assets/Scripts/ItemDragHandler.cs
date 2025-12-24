@@ -20,7 +20,7 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         originalParent = transform.parent;
         originalAnchoredPos = rectTransform.anchoredPosition;
         Debug.Log("взят");
-        transform.SetParent(transform.root);
+        transform.SetParent(canvas.transform);
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.6f;
     }

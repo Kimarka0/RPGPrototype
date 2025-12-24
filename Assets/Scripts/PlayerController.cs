@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     private bool isRunPressed;
     private bool canMove = true;
 
+    public static System.Action OnPlayerReady;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -39,6 +41,8 @@ public class PlayerController : MonoBehaviour
     {
         DialogueNodeManager.instance.OnDialogueStarted.AddListener(DisableMovement);
         DialogueNodeManager.instance.OnDialogueEnded.AddListener(EnableMovement);
+
+        OnPlayerReady?.Invoke();
     }
 
     private void OnMovementInput(InputAction.CallbackContext context)
